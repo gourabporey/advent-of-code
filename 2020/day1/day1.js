@@ -1,14 +1,9 @@
 const fs = require('fs');
-
-const toNumbers = text => +text;
+const { toNumber, product } = require('numbers');
 
 const extractNumbers = text => {
-  return text.split('\n').map(toNumbers);
+  return text.split('\n').map(toNumber);
 }
-
-const multiply = (a, b) => a * b;
-
-const product = numbers => numbers.reduce(multiply, 1);
 
 const twoSumUsingLookup = (numbers, requiredSum) => {
   const remaining = {};
@@ -68,10 +63,7 @@ const threeSum = (numbers, requiredSum) => {
 
 const main = () => {
   fs.readFile('./day1-input.txt', 'utf-8', (err, data) => {
-    if (!data) {
-      console.error(err);
-      return;
-    }
+    if (err) return;
 
     const numbers = extractNumbers(data);
     console.log(product(threeSum(numbers, 2020)));

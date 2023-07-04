@@ -1,0 +1,14 @@
+{
+  "name": "aoc-2020-day1",
+  "version": "1.0.0",
+  "description": "AOC 2020 day1: Report repair",
+  "main": "day1.js",
+  "scripts": {
+    "test": "node --test"
+  },
+  "author": "Gourab Porey",
+  "license": "ISC",
+  "dependencies": {
+    "numbers": "file:../modules/numbers"
+  }
+}

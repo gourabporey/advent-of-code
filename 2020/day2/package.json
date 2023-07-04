@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "numbers": "file:../modules/numbers",
+    "strings": "file:../modules/strings"
+  }
+}

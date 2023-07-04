@@ -1,0 +1,11 @@
+{
+  "name": "arrays",
+  "version": "1.0.0",
+  "description": "This package contains array modules",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --test"
+  },
+  "author": "Gourab Porey",
+  "license": "ISC"
+}

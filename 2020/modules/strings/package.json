@@ -1,0 +1,11 @@
+{
+  "name": "strings",
+  "version": "1.0.0",
+  "description": "This modules contains the string functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --test"
+  },
+  "author": "Gourab Porey",
+  "license": "ISC"
+}
