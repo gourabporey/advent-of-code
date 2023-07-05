@@ -8,10 +8,10 @@ const isValidPassword = ({ password, policy }) => {
   return isInPositionOne !== isInPositionTwo;
 }
 
-const generatePolicy = password => {
+const extractPolicy = password => {
   const [positionsText, char, passwordText] = password.split(/:* /);
   const positions = positionsText.split('-').map(toNumber);
   return { password: passwordText, policy: { char, positions } }
 }
 
-module.exports = { isValidPassword, generatePolicy };
+module.exports = { isValidPassword, extractPolicy };

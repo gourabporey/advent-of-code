@@ -7,10 +7,10 @@ const isValidPassword = ({ password, policy }) => {
   return isInRange({ min, max }, frequency[char]);
 }
 
-const generatePolicy = password => {
-  const [rangeInformation, char, passwordText] = password.split(/:* /);
-  const [min, max] = rangeInformation.split('-').map(toNumber);
+const extractPolicy = password => {
+  const [range, char, passwordText] = password.split(/:* /);
+  const [min, max] = range.split('-').map(toNumber);
   return { password: passwordText, policy: { char, min, max } };
 }
 
-module.exports = { isValidPassword, generatePolicy };
+module.exports = { isValidPassword, extractPolicy };

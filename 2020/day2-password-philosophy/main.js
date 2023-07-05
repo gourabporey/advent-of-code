@@ -1,19 +1,22 @@
 const fs = require('fs');
-const { generatePolicy, isValidPassword } = require('./password-validator-2');
+const { extractPolicy, isValidPassword } = require('./password-validator-2');
 
 const noOfValidPasswords = passwords => {
   return passwords.filter(isValidPassword).length;
 }
 
-const generatePasswordInformation = (rawPasswordsData) => {
-  return rawPasswordsData.split('\n').map(generatePolicy);
+const extractPasswordAndPolicy = (rawPasswordsData) => {
+  return rawPasswordsData.split('\n').map(extractPolicy);
 }
 
 const main = () => {
   fs.readFile('./input.txt', 'utf-8', (err, data) => {
-    if (err) return;
+    if (err) {
+      console.error(err);
+      return;
+    };
 
-    const passwordInformation = generatePasswordInformation(data);
+    const passwordInformation = extractPasswordAndPolicy(data);
     console.log(noOfValidPasswords(passwordInformation));
   });
 }
