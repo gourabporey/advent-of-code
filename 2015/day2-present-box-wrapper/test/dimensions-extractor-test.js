@@ -11,4 +11,14 @@ describe('extractDimensions', () => {
 
     assert.deepStrictEqual(extractDimensions(rawDimensions), dimensions);
   });
+
+  it('should give a list of dimensions for multiple dimensions separated by new line', () => {
+    const rawDimensions = '4x23x21\n22x29x19';
+    const dimensions = [
+      { length: 4, width: 23, height: 21 },
+      { length: 22, width: 29, height: 19 },
+    ];
+
+    assert.deepStrictEqual(extractDimensions(rawDimensions), dimensions);
+  });
 });
