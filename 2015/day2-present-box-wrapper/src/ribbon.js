@@ -2,6 +2,7 @@ const { extractDimensions } = require("./dimensions-extractor");
 const { PresentBox } = require("./present-box");
 
 const add = (a, b) => a + b;
+const sumOf = numbers => numbers.reduce(add, 0);
 
 const findRibbonLength = (dimension) => {
   const presentBox = new PresentBox(dimension);
@@ -11,11 +12,11 @@ const findRibbonLength = (dimension) => {
 };
 
 const findTotalRibbonLength = (rawDimensionsData) => {
-  const isNoAreaInformationPresent = rawDimensionsData === undefined || rawDimensionsData.length === 0;
-  if (isNoAreaInformationPresent) return 0;
-
   const dimensions = extractDimensions(rawDimensionsData);
-  return dimensions.map(findRibbonLength).reduce(add, 0);
+  const ribbonLengths = dimensions.map(findRibbonLength)
+  const totalRibbonLength = sumOf(ribbonLengths);
+
+  return totalRibbonLength;
 }
 
 module.exports = { findTotalRibbonLength };
