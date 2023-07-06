@@ -1,15 +1,19 @@
 const toNumber = text => +text;
 
+const parseDimension = dimension => {
+  const [length, width, height] = dimension.map(toNumber);
+  return { length, width, height };
+};
+
 const extractDimensions = rawDimensionsData => {
-  const isNoAreaInformationPresent = rawDimensionsData === undefined || rawDimensionsData.length === 0;
-  if (isNoAreaInformationPresent) return [];
+  const isEmptyDimensionsData = !rawDimensionsData || rawDimensionsData.length === 0;
+  if (isEmptyDimensionsData) return [];
 
-  const dimensions = rawDimensionsData.split('\n').map(dimension => dimension.split('x'));
+  const dimensionLines = rawDimensionsData.split('\n');
+  const splitDimensions = dimensionLines.map(line => line.split('x'));
+  const dimensions = splitDimensions.map(parseDimension);
 
-  return dimensions.map(dimension => {
-    const [length, width, height] = dimension.map(toNumber);
-    return { length, width, height };
-  });
+  return dimensions;
 }
 
 module.exports = { extractDimensions };
