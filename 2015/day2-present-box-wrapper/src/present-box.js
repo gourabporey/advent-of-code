@@ -13,28 +13,20 @@ class PresentBox {
     return numbers.reduce((sum, number) => sum + number, 0);
   }
 
-  #multiply([a, b]) {
-    return a * b;
-  }
-
-  #calculateSlack(surfaceAreas) {
+  #calculateSlackArea(surfaceAreas) {
     return Math.min(...surfaceAreas);
   }
 
   #getSurfaces() {
-    const l = this.#length;
-    const w = this.#width;
-    const h = this.#height;
-
+    const [l, w, h] = [this.#length, this.#width, this.#height];
     return [[l, w], [w, h], [h, l]];
   }
 
   areaOfWrapper() {
-    const surfaces = this.#getSurfaces();
-    const surfaceAreas = surfaces.map(this.#multiply);
+    const surfaceAreaOfFaces = this.#getSurfaces().map(([a, b]) => a * b);
 
-    const totalSurfaceArea = 2 * this.#sumOf(surfaceAreas);
-    const slackArea = this.#calculateSlack(surfaceAreas);
+    const totalSurfaceArea = 2 * this.#sumOf(surfaceAreaOfFaces);
+    const slackArea = this.#calculateSlackArea(surfaceAreaOfFaces);
 
     return totalSurfaceArea + slackArea;
   }
