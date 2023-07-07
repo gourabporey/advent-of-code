@@ -1,30 +1,37 @@
 const { Position } = require('./position');
 
-const noOfHousesCovered = ([...instructions]) => {
-  const santaPosition = new Position(0, 0);
-  const houses = new Set();
+const changeDeliveryPosition = (santaPosition, instruction) => {
+  switch (instruction) {
+    case '>': santaPosition.east();
+      break;
+    case '<': santaPosition.west();
+      break;
+    case '^': santaPosition.north();
+      break;
+    case 'v': santaPosition.south();
+      break;
+  }
+};
 
-  let instructionId = 0;
+const getDeliveryPersons = numberOfDeliveryPersons => {
+  return Array.from({ length: numberOfDeliveryPersons }).map(() => new Position(0, 0));
+};
 
-  do {
-    houses.add(santaPosition.toString());
-    const instruction = instructions[instructionId];
+const noOfHousesCovered = ([...instructions], noOfDeliveryPersons = 1) => {
+  const deliveryPersons = getDeliveryPersons(noOfDeliveryPersons);
 
-    switch (instruction) {
-      case '>': santaPosition.east();
-        break;
-      case '<': santaPosition.west();
-        break;
-      case '^': santaPosition.north();
-        break;
-      case 'v': santaPosition.south();
-        break;
-    }
+  const housesGifted = new Set();
 
-    instructionId++;
-  } while (instructionId <= instructions.length);
+  housesGifted.add(deliveryPersons[0].toString());
 
-  return houses.size;
+  for (const instruction of instructions) {
+    const currentDeliveryPersonPosition = deliveryPersons[0];
+    changeDeliveryPosition(currentDeliveryPersonPosition, instruction);
+    housesGifted.add(currentDeliveryPersonPosition.toString());
+    deliveryPersons.reverse();
+  }
+
+  return housesGifted.size;
 };
 
 module.exports = { noOfHousesCovered };

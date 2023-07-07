@@ -16,8 +16,14 @@ describe('noOfHousesCovered', () => {
     assert.strictEqual(noOfHousesCovered('v>^<'), 4);
   });
 
-  it('should be 2 houses if only 2direction instruction is alternating', () => {
+  it('should be 2 houses if only 2 direction instruction is alternating', () => {
     assert.strictEqual(noOfHousesCovered('^v^v^v^v^v'), 2);
     assert.strictEqual(noOfHousesCovered('><><><><'), 2);
+  });
+
+  it('Should be done by both santa and robo santa in a alternating sequence', () => {
+    assert.strictEqual(noOfHousesCovered('^v', 2), 3);
+    assert.strictEqual(noOfHousesCovered('^>v<', 2), 3);
+    assert.strictEqual(noOfHousesCovered('^v^v^v^v^v', 2), 11);
   });
 });
