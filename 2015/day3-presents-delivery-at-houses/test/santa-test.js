@@ -1,0 +1,13 @@
+const assert = require('assert');
+const { describe, it } = require('node:test');
+
+const { noOfHousesCovered } = require('../src/santa.js');
+
+describe('noOfHousesCovered', () => {
+  it('should be two houses for one direction instruction', () => {
+    assert.strictEqual(noOfHousesCovered('>'), 2);
+    assert.strictEqual(noOfHousesCovered('^'), 2);
+    assert.strictEqual(noOfHousesCovered('<'), 2);
+    assert.strictEqual(noOfHousesCovered('v'), 2);
+  });
+});
