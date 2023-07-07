@@ -10,4 +10,9 @@ describe('noOfHousesCovered', () => {
     assert.strictEqual(noOfHousesCovered('<'), 2);
     assert.strictEqual(noOfHousesCovered('v'), 2);
   });
+
+  it('should be 4 houses for axes alternatively', () => {
+    assert.strictEqual(noOfHousesCovered('^>v<'), 4);
+    assert.strictEqual(noOfHousesCovered('v>^<'), 4);
+  });
 });
