@@ -43,4 +43,17 @@ describe('PresentBox', () => {
       assert.strictEqual(presentBox2.volume(), 10);
     });
   });
+
+  describe('getPerimeterOfFaces', () => {
+    it('should give base face, side face and top face perimeters list', () => {
+      const dimensions1 = { width: 2, length: 3, height: 4 };
+      const presentBox1 = new PresentBox(dimensions1);
+
+      const dimensions2 = { width: 1, length: 10, height: 1 };
+      const presentBox2 = new PresentBox(dimensions2);
+
+      assert.deepStrictEqual(presentBox1.getPerimeterOfFaces(), [10, 12, 14]);
+      assert.deepStrictEqual(presentBox2.getPerimeterOfFaces(), [22, 4, 22]);
+    });
+  });
 });
