@@ -8,7 +8,8 @@ const readInstructions = (onRead) => {
 
 const main = () => {
   readInstructions(instructions => {
-    console.log('Total Number of houses that received gift: ', noOfHousesCovered(instructions));
+    console.log('Part1: Total Number of houses that received gift: ', noOfHousesCovered(instructions));
+    console.log('Part2: Total Number of houses that received gift: ', noOfHousesCovered(instructions, 2));
   });
 };
 
