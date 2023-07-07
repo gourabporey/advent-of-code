@@ -1,4 +1,4 @@
-const toNumber = text => +text;
+const { toNumber } = require('../lib/numbers.js');
 
 const parseDimension = dimension => {
   const [length, width, height] = dimension.map(toNumber);
@@ -14,6 +14,6 @@ const extractDimensions = rawDimensionsData => {
   const dimensions = splitDimensions.map(parseDimension);
 
   return dimensions;
-}
+};
 
 module.exports = { extractDimensions };

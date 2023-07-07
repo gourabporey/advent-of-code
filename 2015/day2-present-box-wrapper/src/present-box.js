@@ -17,13 +17,13 @@ class PresentBox {
     return Math.min(...surfaceAreas);
   }
 
-  getSurfaces() {
+  #getSurfaces() {
     const [l, w, h] = [this.#length, this.#width, this.#height];
     return [[l, w], [w, h], [h, l]];
   }
 
   areaOfWrapper() {
-    const surfaceAreaOfFaces = this.getSurfaces().map(([a, b]) => a * b);
+    const surfaceAreaOfFaces = this.#getSurfaces().map(([a, b]) => a * b);
 
     const totalSurfaceArea = 2 * this.#sumOf(surfaceAreaOfFaces);
     const slackArea = this.#calculateSlackArea(surfaceAreaOfFaces);
@@ -32,7 +32,7 @@ class PresentBox {
   }
 
   getPerimeterOfFaces() {
-    const perimeters = this.getSurfaces().map((sides) => 2 * this.#sumOf(sides));
+    const perimeters = this.#getSurfaces().map((sides) => 2 * this.#sumOf(sides));
     return perimeters;
   }
 
