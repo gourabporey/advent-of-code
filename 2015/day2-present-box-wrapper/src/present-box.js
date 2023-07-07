@@ -4,9 +4,9 @@ class PresentBox {
   #height;
 
   constructor({ length, width, height }) {
-    this.#length = length;
-    this.#width = width;
-    this.#height = height;
+    this.#length = length || 0;
+    this.#width = width || 0;
+    this.#height = height || 0;
   }
 
   #sumOf(numbers) {
