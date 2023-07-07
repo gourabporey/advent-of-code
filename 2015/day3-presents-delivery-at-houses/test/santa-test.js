@@ -15,4 +15,9 @@ describe('noOfHousesCovered', () => {
     assert.strictEqual(noOfHousesCovered('^>v<'), 4);
     assert.strictEqual(noOfHousesCovered('v>^<'), 4);
   });
+
+  it('should be 2 houses if only 2direction instruction is alternating', () => {
+    assert.strictEqual(noOfHousesCovered('^v^v^v^v^v'), 2);
+    assert.strictEqual(noOfHousesCovered('><><><><'), 2);
+  });
 });
