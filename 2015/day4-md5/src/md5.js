@@ -5,6 +5,8 @@ const md5 = (message) => {
 };
 
 const getSuffixOfMd5Message = (messagePrefix, hashPrefix) => {
+  if (!hashPrefix) return '';
+
   let messageSuffix = 0;
 
   while (true) {
