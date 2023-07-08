@@ -23,6 +23,10 @@ class Position {
     this.#y++;
   }
 
+  coordinate() {
+    return { x: this.#x, y: this.#y };
+  }
+
   toString() {
     return `${this.#x}:${this.#y}`;
   }
