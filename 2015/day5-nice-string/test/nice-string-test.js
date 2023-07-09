@@ -4,11 +4,11 @@ const { describe, it } = require('node:test');
 const { countNiceStrings, hasVowels, hasRepeatingChar, isNiceString, hasRestrictedStrings, hasPairOfTwoLetters } = require('../src/nice-string');
 
 describe('hasVowels', () => {
-  it('should give false for no text', () => {
+  it('should be false for no text', () => {
     assert.strictEqual(hasVowels(''), false);
   });
 
-  it('should check the text to have 1 vowel for vowel count', () => {
+  it('should consider required vowel count to be 1 for only text as argument', () => {
     assert.strictEqual(hasVowels('ab'), true);
     assert.strictEqual(hasVowels('bb'), false);
   });

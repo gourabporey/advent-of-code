@@ -8,8 +8,8 @@ const hasRepeatingChar = ([...text]) => {
   return text.some((char, charIndex) => char === text[charIndex + 1]);
 };
 
-const hasRestrictedStrings = (string, restrictedStrings) => {
-  return restrictedStrings.some((restrictedString) => string.includes(restrictedString));
+const hasRestrictedStrings = (text, restrictedStrings) => {
+  return restrictedStrings.some((restrictedString) => text.includes(restrictedString));
 };
 
 const hasPairOfTwoLetters = (text) => {
