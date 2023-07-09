@@ -1,9 +1,19 @@
+const VOWELS = ['a', 'e', 'i', 'o', 'u'];
+
 const hasVowels = ([...text], count = 1) => {
-  return text.filter((char) => ['a', 'e', 'i', 'o', 'u'].includes(char.toLowerCase())).length >= count;
+  return text.filter((char) => VOWELS.includes(char.toLowerCase())).length >= count;
 };
 
 const hasRepeatingChar = ([...text]) => {
   return text.some((char, charIndex) => char === text[charIndex + 1]);
+};
+
+const isNiceString = (string, rules) => {
+  const vowelMatchingCriteria = rules?.vowelCount ? hasVowels(string, rules.vowelCount) : true;
+
+  const repeatingCharCriteria = rules?.repeatingChar ? hasRepeatingChar(string) : true;
+
+  return vowelMatchingCriteria && repeatingCharCriteria;
 };
 
 countNiceStrings = (rawStrings, rules) => {
@@ -11,13 +21,7 @@ countNiceStrings = (rawStrings, rules) => {
 
   const strings = rawStrings.split('\n');
 
-  return strings.filter((string) => {
-    const vowelMatchingCriteria = rules.vowelCount ? hasVowels(string, rules.vowelCount) : true;
-
-    const repeatingCharCriteria = rules.repeatingChar ? hasRepeatingChar(string) : true;
-
-    return vowelMatchingCriteria && repeatingCharCriteria;
-  }).length;
+  return strings.filter((string) => isNiceString(string, rules)).length;
 };
 
-module.exports = { countNiceStrings, hasRepeatingChar, hasVowels };
+module.exports = { countNiceStrings, isNiceString, hasRepeatingChar, hasVowels };

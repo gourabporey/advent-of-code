@@ -1,7 +1,7 @@
 const assert = require('assert');
 const { describe, it } = require('node:test');
 
-const { countNiceStrings, hasVowels, hasRepeatingChar } = require('../src/nice-string');
+const { countNiceStrings, hasVowels, hasRepeatingChar, isNiceString } = require('../src/nice-string');
 
 describe('hasVowels', () => {
   it('should give false for no text', () => {
@@ -38,6 +38,33 @@ describe('hasRepeatingChar', () => {
 
   it('should true a text having repeating chars at any place', () => {
     assert.strictEqual(hasRepeatingChar('qwertyuiopaaa'), true);
+  });
+});
+
+describe('isNiceString', () => {
+  it('should be true for no rules', () => {
+    assert.strictEqual(isNiceString(''), true);
+    assert.strictEqual(isNiceString('gourab'), true);
+  });
+
+  it('should be true for a string that satisfies all the rules', () => {
+    const rules = {
+      vowelCount: 2,
+      repeatingChar: true
+    };
+
+    assert.strictEqual(isNiceString('hello', rules), true);
+    assert.strictEqual(isNiceString('aaau', rules), true);
+  });
+
+  it('should be false for a string that doesn\'t satisfies all the rules', () => {
+    const rules = {
+      vowelCount: 2,
+      repeatingChar: true
+    };
+
+    assert.strictEqual(isNiceString('gourab', rules), false);
+    assert.strictEqual(isNiceString('hell', rules), false);
   });
 });
 
