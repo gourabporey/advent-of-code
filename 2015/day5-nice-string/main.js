@@ -7,13 +7,22 @@ const readStrings = onRead => {
 
 const main = () => {
   readStrings(strings => {
-    const rules = {
+    const part1Rules = {
       vowelCount: 3,
       repeatingChar: true,
       restrictedStrings: ['ab', 'xy', 'pq', 'cd']
     };
-    const numberOfNiceStrings = countNiceStrings(strings, rules);
-    console.log('Part1: No of nice Strings:', numberOfNiceStrings);
+    const numberOfNiceStringsP1 = countNiceStrings(strings, part1Rules);
+
+    const part2Rules = {
+      repeatingCharWithOneInMiddle: true,
+      twoLetterPair: true
+    };
+
+    const numberOfNiceStringsP2 = countNiceStrings(strings, part2Rules);
+
+    console.log('Part1: No of nice Strings:', numberOfNiceStringsP1);
+    console.log('Part2: No of nice Strings:', numberOfNiceStringsP2);
   });
 };
 

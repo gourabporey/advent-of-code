@@ -24,9 +24,11 @@ const isNiceString = (string, rules) => {
 
   const restrictedStringCriteria = rules?.restrictedStrings ? !hasRestrictedStrings(string, rules.restrictedStrings) : true;
 
-  const twoLetterPairCriteria = rules?.twoLetterCriteria ? hasPairOfTwoLetters(string) : true;
+  const twoLetterPairCriteria = rules?.twoLetterPair ? hasPairOfTwoLetters(string) : true;
 
-  return vowelMatchingCriteria && repeatingCharCriteria && restrictedStringCriteria && twoLetterPairCriteria;
+  const repeatingCharWithOneCharInMiddleCriteria = rules?.repeatingCharWithOneInMiddle ? /(.).\1/.test(string) : true;
+
+  return vowelMatchingCriteria && repeatingCharCriteria && restrictedStringCriteria && twoLetterPairCriteria && repeatingCharWithOneCharInMiddleCriteria;
 };
 
 countNiceStrings = (rawStrings, rules) => {
