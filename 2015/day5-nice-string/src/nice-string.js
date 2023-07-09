@@ -19,31 +19,41 @@ const hasPairOfTwoLetters = (text) => {
 };
 
 const isNiceString = (string, rules) => {
-  const vowelMatchingCriteria = rules?.vowelCount
-    ? hasVowels(string, rules.vowelCount)
+  if (!rules) return true;
+
+  const {
+    vowelCount,
+    repeatingChar,
+    restrictedStrings,
+    twoLetterPair,
+    repeatingCharWithOneInMiddle,
+  } = rules;
+
+  const satisfiesVowelMatching = vowelCount
+    ? hasVowels(string, vowelCount)
     : true;
 
-  const repeatingCharCriteria = rules?.repeatingChar
+  const satisfiesLetterRepetition = repeatingChar
     ? hasRepeatingChar(string)
     : true;
 
-  const restrictedStringCriteria = rules?.restrictedStrings
-    ? !hasRestrictedStrings(string, rules.restrictedStrings)
+  const satisfiesRestrictedStringsExclusion = restrictedStrings
+    ? !hasRestrictedStrings(string, restrictedStrings)
     : true;
 
-  const twoLetterPairCriteria = rules?.twoLetterPair
+  const satisfiesTwoLetterPair = twoLetterPair
     ? hasPairOfTwoLetters(string)
     : true;
 
-  const repeatingCharWithOneCharInMiddleCriteria =
-    rules?.repeatingCharWithOneInMiddle ? /(.).\1/.test(string) : true;
+  const satisfiesLetterRepetitionWithOneLetterInMiddle =
+    repeatingCharWithOneInMiddle ? /(.).\1/.test(string) : true;
 
   return (
-    vowelMatchingCriteria &&
-    repeatingCharCriteria &&
-    restrictedStringCriteria &&
-    twoLetterPairCriteria &&
-    repeatingCharWithOneCharInMiddleCriteria
+    satisfiesVowelMatching &&
+    satisfiesLetterRepetition &&
+    satisfiesRestrictedStringsExclusion &&
+    satisfiesTwoLetterPair &&
+    satisfiesLetterRepetitionWithOneLetterInMiddle
   );
 };
 

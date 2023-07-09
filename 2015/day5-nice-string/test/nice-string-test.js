@@ -1,7 +1,14 @@
 const assert = require('assert');
 const { describe, it } = require('node:test');
 
-const { countNiceStrings, hasVowels, hasRepeatingChar, isNiceString, hasRestrictedStrings, hasPairOfTwoLetters } = require('../src/nice-string');
+const {
+  countNiceStrings,
+  hasVowels,
+  hasRepeatingChar,
+  isNiceString,
+  hasRestrictedStrings,
+  hasPairOfTwoLetters,
+} = require('../src/nice-string');
 
 describe('hasVowels', () => {
   it('should be false for no text', () => {
@@ -115,7 +122,7 @@ describe('isNiceString', () => {
   it('should be true for a string that satisfies all the rules', () => {
     const rules1 = {
       vowelCount: 2,
-      repeatingChar: true
+      repeatingChar: true,
     };
 
     assert.strictEqual(isNiceString('hello', rules1), true);
@@ -124,16 +131,16 @@ describe('isNiceString', () => {
     const rules2 = {
       vowelCount: 3,
       repeatingChar: true,
-      restrictedStrings: ['ab', 'xy', 'pq', 'cd']
+      restrictedStrings: ['ab', 'xy', 'pq', 'cd'],
     };
 
     assert.strictEqual(isNiceString('aaa', rules2), true);
   });
 
-  it('should be false for a string that doesn\'t satisfies all the rules', () => {
+  it("should be false for a string that doesn't satisfies all the rules", () => {
     const rules = {
       vowelCount: 2,
-      repeatingChar: true
+      repeatingChar: true,
     };
 
     assert.strictEqual(isNiceString('gourab', rules), false);
