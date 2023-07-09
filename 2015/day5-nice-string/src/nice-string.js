@@ -19,17 +19,32 @@ const hasPairOfTwoLetters = (text) => {
 };
 
 const isNiceString = (string, rules) => {
-  const vowelMatchingCriteria = rules?.vowelCount ? hasVowels(string, rules.vowelCount) : true;
+  const vowelMatchingCriteria = rules?.vowelCount
+    ? hasVowels(string, rules.vowelCount)
+    : true;
 
-  const repeatingCharCriteria = rules?.repeatingChar ? hasRepeatingChar(string) : true;
+  const repeatingCharCriteria = rules?.repeatingChar
+    ? hasRepeatingChar(string)
+    : true;
 
-  const restrictedStringCriteria = rules?.restrictedStrings ? !hasRestrictedStrings(string, rules.restrictedStrings) : true;
+  const restrictedStringCriteria = rules?.restrictedStrings
+    ? !hasRestrictedStrings(string, rules.restrictedStrings)
+    : true;
 
-  const twoLetterPairCriteria = rules?.twoLetterPair ? hasPairOfTwoLetters(string) : true;
+  const twoLetterPairCriteria = rules?.twoLetterPair
+    ? hasPairOfTwoLetters(string)
+    : true;
 
-  const repeatingCharWithOneCharInMiddleCriteria = rules?.repeatingCharWithOneInMiddle ? /(.).\1/.test(string) : true;
+  const repeatingCharWithOneCharInMiddleCriteria =
+    rules?.repeatingCharWithOneInMiddle ? /(.).\1/.test(string) : true;
 
-  return vowelMatchingCriteria && repeatingCharCriteria && restrictedStringCriteria && twoLetterPairCriteria && repeatingCharWithOneCharInMiddleCriteria;
+  return (
+    vowelMatchingCriteria &&
+    repeatingCharCriteria &&
+    restrictedStringCriteria &&
+    twoLetterPairCriteria &&
+    repeatingCharWithOneCharInMiddleCriteria
+  );
 };
 
 countNiceStrings = (rawStrings, rules) => {
@@ -40,4 +55,11 @@ countNiceStrings = (rawStrings, rules) => {
   return strings.filter((string) => isNiceString(string, rules)).length;
 };
 
-module.exports = { countNiceStrings, isNiceString, hasRepeatingChar, hasVowels, hasRestrictedStrings, hasPairOfTwoLetters };
+module.exports = {
+  countNiceStrings,
+  isNiceString,
+  hasRepeatingChar,
+  hasVowels,
+  hasRestrictedStrings,
+  hasPairOfTwoLetters,
+};
