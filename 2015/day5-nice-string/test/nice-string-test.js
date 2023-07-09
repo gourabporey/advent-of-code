@@ -1,7 +1,7 @@
 const assert = require('assert');
 const { describe, it } = require('node:test');
 
-const { countNiceStrings, hasVowels, hasRepeatingChar, isNiceString } = require('../src/nice-string');
+const { countNiceStrings, hasVowels, hasRepeatingChar, isNiceString, hasRestrictedStrings } = require('../src/nice-string');
 
 describe('hasVowels', () => {
   it('should give false for no text', () => {
@@ -41,6 +41,53 @@ describe('hasRepeatingChar', () => {
   });
 });
 
+describe('hasRestrictedStrings', () => {
+  it('should be true if the string includes any of the restricted strings', () => {
+    const string = 'Hello world!';
+    const restrictedStrings = ['world', 'foo'];
+
+    const result = hasRestrictedStrings(string, restrictedStrings);
+
+    assert.strictEqual(result, true);
+  });
+
+  it('should be false if the string does not include any of the restricted strings', () => {
+    const string = 'Hello world!';
+    const restrictedStrings = ['foo', 'bar'];
+
+    const result = hasRestrictedStrings(string, restrictedStrings);
+
+    assert.strictEqual(result, false);
+  });
+
+  it('should be false if the restricted strings array is empty', () => {
+    const string = 'Hello world!';
+    const restrictedStrings = [];
+
+    const result = hasRestrictedStrings(string, restrictedStrings);
+
+    assert.strictEqual(result, false);
+  });
+
+  it('should be false if the string is empty', () => {
+    const string = '';
+    const restrictedStrings = ['foo', 'bar'];
+
+    const result = hasRestrictedStrings(string, restrictedStrings);
+
+    assert.strictEqual(result, false);
+  });
+
+  it('should be false if both the string and restricted strings array are empty', () => {
+    const string = '';
+    const restrictedStrings = [];
+
+    const result = hasRestrictedStrings(string, restrictedStrings);
+
+    assert.strictEqual(result, false);
+  });
+});
+
 describe('isNiceString', () => {
   it('should be true for no rules', () => {
     assert.strictEqual(isNiceString(''), true);
@@ -48,13 +95,21 @@ describe('isNiceString', () => {
   });
 
   it('should be true for a string that satisfies all the rules', () => {
-    const rules = {
+    const rules1 = {
       vowelCount: 2,
       repeatingChar: true
     };
 
-    assert.strictEqual(isNiceString('hello', rules), true);
-    assert.strictEqual(isNiceString('aaau', rules), true);
+    assert.strictEqual(isNiceString('hello', rules1), true);
+    assert.strictEqual(isNiceString('aaa', rules1), true);
+
+    const rules2 = {
+      vowelCount: 3,
+      repeatingChar: true,
+      restrictedStrings: ['ab', 'xy', 'pq', 'cd']
+    };
+
+    assert.strictEqual(isNiceString('aaa', rules2), true);
   });
 
   it('should be false for a string that doesn\'t satisfies all the rules', () => {

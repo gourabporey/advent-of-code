@@ -8,12 +8,18 @@ const hasRepeatingChar = ([...text]) => {
   return text.some((char, charIndex) => char === text[charIndex + 1]);
 };
 
+const hasRestrictedStrings = (string, restrictedStrings) => {
+  return restrictedStrings.some((restrictedString) => string.includes(restrictedString));
+};
+
 const isNiceString = (string, rules) => {
   const vowelMatchingCriteria = rules?.vowelCount ? hasVowels(string, rules.vowelCount) : true;
 
   const repeatingCharCriteria = rules?.repeatingChar ? hasRepeatingChar(string) : true;
 
-  return vowelMatchingCriteria && repeatingCharCriteria;
+  const restrictedStringCriteria = rules?.restrictedStrings ? !hasRestrictedStrings(string, rules.restrictedStrings) : true;
+
+  return vowelMatchingCriteria && repeatingCharCriteria && restrictedStringCriteria;
 };
 
 countNiceStrings = (rawStrings, rules) => {
@@ -24,4 +30,4 @@ countNiceStrings = (rawStrings, rules) => {
   return strings.filter((string) => isNiceString(string, rules)).length;
 };
 
-module.exports = { countNiceStrings, isNiceString, hasRepeatingChar, hasVowels };
+module.exports = { countNiceStrings, isNiceString, hasRepeatingChar, hasVowels, hasRestrictedStrings };
