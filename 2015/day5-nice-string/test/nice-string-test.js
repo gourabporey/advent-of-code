@@ -1,7 +1,7 @@
 const assert = require('assert');
 const { describe, it } = require('node:test');
 
-const { countNiceStrings, hasVowels, hasRepeatingChar, isNiceString, hasRestrictedStrings } = require('../src/nice-string');
+const { countNiceStrings, hasVowels, hasRepeatingChar, isNiceString, hasRestrictedStrings, hasPairOfTwoLetters } = require('../src/nice-string');
 
 describe('hasVowels', () => {
   it('should give false for no text', () => {
@@ -85,6 +85,24 @@ describe('hasRestrictedStrings', () => {
     const result = hasRestrictedStrings(string, restrictedStrings);
 
     assert.strictEqual(result, false);
+  });
+});
+
+describe('hasPairOfTwoLetters', () => {
+  it('should be false for no string', () => {
+    assert.strictEqual(hasPairOfTwoLetters(), false);
+  });
+
+  it('should be true for text containing a pair of two letter', () => {
+    assert.strictEqual(hasPairOfTwoLetters('gogo'), true);
+  });
+
+  it('should be false for overlapping two letter pairs', () => {
+    assert.strictEqual(hasPairOfTwoLetters('aaa'), false);
+  });
+
+  it('should be false for text having no two letter pairs', () => {
+    assert.strictEqual(hasPairOfTwoLetters('qwerty'), false);
   });
 });
 

@@ -12,6 +12,11 @@ const hasRestrictedStrings = (string, restrictedStrings) => {
   return restrictedStrings.some((restrictedString) => string.includes(restrictedString));
 };
 
+const hasPairOfTwoLetters = (text) => {
+  const pairOfTwoLettersRegex = /(..).*\1/;
+  return pairOfTwoLettersRegex.test(text);
+};
+
 const isNiceString = (string, rules) => {
   const vowelMatchingCriteria = rules?.vowelCount ? hasVowels(string, rules.vowelCount) : true;
 
@@ -19,7 +24,9 @@ const isNiceString = (string, rules) => {
 
   const restrictedStringCriteria = rules?.restrictedStrings ? !hasRestrictedStrings(string, rules.restrictedStrings) : true;
 
-  return vowelMatchingCriteria && repeatingCharCriteria && restrictedStringCriteria;
+  const twoLetterPairCriteria = rules?.twoLetterCriteria ? hasPairOfTwoLetters(string) : true;
+
+  return vowelMatchingCriteria && repeatingCharCriteria && restrictedStringCriteria && twoLetterPairCriteria;
 };
 
 countNiceStrings = (rawStrings, rules) => {
@@ -30,4 +37,4 @@ countNiceStrings = (rawStrings, rules) => {
   return strings.filter((string) => isNiceString(string, rules)).length;
 };
 
-module.exports = { countNiceStrings, isNiceString, hasRepeatingChar, hasVowels, hasRestrictedStrings };
+module.exports = { countNiceStrings, isNiceString, hasRepeatingChar, hasVowels, hasRestrictedStrings, hasPairOfTwoLetters };
