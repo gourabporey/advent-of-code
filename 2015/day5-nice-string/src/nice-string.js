@@ -1,20 +1,21 @@
 const VOWELS = ['a', 'e', 'i', 'o', 'u'];
 
+const isVowel = (letter) => VOWELS.includes(letter.toLowerCase());
+
 const hasVowels = ([...text], count = 1) => {
-  return text.filter((char) => VOWELS.includes(char.toLowerCase())).length >= count;
+  return text.filter(isVowel).length >= count;
 };
 
 const hasRepeatingChar = ([...text]) => {
-  return text.some((char, charIndex) => char === text[charIndex + 1]);
+  return text.some((letter, letterIndex) => letter === text[letterIndex + 1]);
 };
 
 const hasRestrictedStrings = (text, restrictedStrings) => {
-  return restrictedStrings.some((restrictedString) => text.includes(restrictedString));
+  return restrictedStrings.some((string) => text.includes(string));
 };
 
 const hasPairOfTwoLetters = (text) => {
-  const pairOfTwoLettersRegex = /(..).*\1/;
-  return pairOfTwoLettersRegex.test(text);
+  return /(..).*\1/.test(text);
 };
 
 const isNiceString = (string, rules) => {
