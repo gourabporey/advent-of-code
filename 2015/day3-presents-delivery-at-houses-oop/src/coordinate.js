@@ -1,6 +1,8 @@
 const DELTAS = {
   NORTH: { x: 0, y: 1 },
   SOUTH: { x: 0, y: -1 },
+  WEST: { x: -1, y: 0 },
+  EAST: { x: 1, y: 0 },
 };
 
 class Coordinate {
@@ -21,6 +23,18 @@ class Coordinate {
   toSouth() {
     this.#x += DELTAS.SOUTH.x;
     this.#y += DELTAS.SOUTH.y;
+    return new Coordinate(this.#x, this.#y);
+  }
+
+  toWest() {
+    this.#x += DELTAS.WEST.x;
+    this.#y += DELTAS.WEST.y;
+    return new Coordinate(this.#x, this.#y);
+  }
+
+  toEast() {
+    this.#x += DELTAS.EAST.x;
+    this.#y += DELTAS.EAST.y;
     return new Coordinate(this.#x, this.#y);
   }
 
