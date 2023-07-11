@@ -5,9 +5,12 @@ class Santas {
     this.#santas = santas;
   }
 
+  changeTurn() {
+    this.#santas.reverse();
+  }
+
   moveCurrentToNorth() {
     const currentSanta = this.#santas[0];
-    this.#santas.reverse();
     return currentSanta.moveToNorth();
   }
 }

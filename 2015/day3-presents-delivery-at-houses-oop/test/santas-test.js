@@ -18,6 +18,7 @@ describe('Santas', () => {
       const santaGroup = new Santas(santas);
 
       assert.ok(santaGroup.moveCurrentToNorth());
+      santaGroup.changeTurn();
       assert.ok(santaGroup.moveCurrentToNorth());
       assert.strictEqual(santa1.moveToNorth.mock.callCount(), 1);
       assert.strictEqual(santa2.moveToNorth.mock.callCount(), 1);
