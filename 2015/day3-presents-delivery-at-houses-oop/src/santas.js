@@ -13,6 +13,11 @@ class Santas {
     const currentSanta = this.#santas[0];
     return currentSanta.moveToNorth();
   }
+
+  moveCurrentToSouth() {
+    const currentSanta = this.#santas[0];
+    return currentSanta.moveToSouth();
+  }
 }
 
 module.exports = { Santas };
