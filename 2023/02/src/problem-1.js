@@ -1,6 +1,4 @@
-const add = (a, b) => a + b;
-
-const sumOf = (numbers) => numbers.reduce(add, 0);
+const { sumOf } = require('../lib/arrays');
 
 const calculateSumOfValidGames = (gamesData, validContainerDetails) => {
   const validGames = gamesData.filter((gameData) => {
@@ -16,4 +14,4 @@ const calculateSumOfValidGames = (gamesData, validContainerDetails) => {
   return sumOf(validGames.map(({ Game }) => Game));
 };
 
-module.exports = { calculateSumOfValidGames };
+module.exports = { sumOf, calculateSumOfValidGames };
