@@ -6,7 +6,7 @@ const parseGameData = (rawGameData) => {
   return rawGameData.split('\n').map((line) => {
     return JSON.parse(
       line
-        .replace(/Game\s(\d+):/, '"Game" :$1, "balls": [{')
+        .replace(/Game\s(\d+):/, '"Game" :$1, "cubes": [{')
         .replaceAll(/(\d+)\s(\w+)/g, '"$2": $1')
         .replaceAll(';', '},{')
         .replace(/^/, '{')

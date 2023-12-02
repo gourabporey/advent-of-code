@@ -1,23 +1,23 @@
 const { sumOf } = require('../lib/arrays');
 
 const calculateSumOfPowers = (gamesData) => {
-  const minimumRequiredBallsInEachGame = gamesData.map(({ balls }) => {
-    const colors = { red: [], green: [], blue: [] };
+  const fewestRequiredCubesInAllGame = gamesData.map(({ cubes }) => {
+    const fewestCubeCountsPossible = { red: 0, green: 0, blue: 0 };
 
-    balls.forEach(({ red = 0, green = 0, blue = 0 }) => {
-      colors.red.push(red);
-      colors.green.push(green);
-      colors.blue.push(blue);
+    cubes.forEach((cube) => {
+      Object.entries(cube).forEach(
+        ([color, count]) =>
+          (fewestCubeCountsPossible[color] = Math.max(
+            fewestCubeCountsPossible[color],
+            count
+          ))
+      );
     });
 
-    return {
-      red: Math.max(...colors.red),
-      green: Math.max(...colors.green),
-      blue: Math.max(...colors.blue),
-    };
+    return fewestCubeCountsPossible;
   });
 
-  const powers = minimumRequiredBallsInEachGame.map(
+  const powers = fewestRequiredCubesInAllGame.map(
     ({ red, green, blue }) => red * green * blue
   );
 
