@@ -7,7 +7,10 @@ const calculateSumOfAllScratchCards = (scratchCards) => {
   const cardsInstances = new Array(noOfCards).fill(1);
 
   points.forEach((point, index) => {
-    for (let i = index + 1; i <= index + point; i++) {
+    const nextNumIndex = index + 1;
+    const copyTillIndex = index + point;
+
+    for (let i = nextNumIndex; i <= copyTillIndex; i++) {
       cardsInstances[i] += cardsInstances[index] * 1;
     }
   });

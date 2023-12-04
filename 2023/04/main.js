@@ -14,6 +14,7 @@ const parseScratchCards = (rawScratchCards) => {
 const main = () => {
   const rawScratchCards = fs.readFileSync('./data/input.txt', 'utf8');
   const parsedScratchCards = parseScratchCards(rawScratchCards);
+  console.log(parsedScratchCards);
 
   const sumOfWinningNumberPoints =
     calculateSumOfWinningNumberPoints(parsedScratchCards);
