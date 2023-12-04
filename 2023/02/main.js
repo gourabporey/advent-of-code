@@ -1,6 +1,6 @@
 const fs = require('fs');
-const { calculateSumOfValidGames } = require('./src/problem-1');
 const { calculateSumOfPowers } = require('./src/problem-2');
+const { calculateSumOfIdsOfValidGame } = require('./src/problem-1');
 
 const parseGameData = (rawGameData) => {
   return rawGameData.split('\n').map((line) => {
@@ -23,7 +23,7 @@ const main = () => {
     green: 13,
     blue: 14,
   };
-  const sumOfValidGames = calculateSumOfValidGames(
+  const sumOfValidGames = calculateSumOfIdsOfValidGame(
     parsedGameData,
     validContainerDetails
   );

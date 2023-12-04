@@ -10,7 +10,7 @@ const validCubeCountsMatcher =
     );
   };
 
-const calculateSumOfValidGames = (gamesData, validCubeCounts) => {
+const calculateSumOfIdsOfValidGame = (gamesData, validCubeCounts) => {
   const validGames = gamesData.filter(({ cubes }) =>
     cubes.every(validCubeCountsMatcher(validCubeCounts))
   );
@@ -20,4 +20,7 @@ const calculateSumOfValidGames = (gamesData, validCubeCounts) => {
   return sumOf(gameIDsOfValidGames);
 };
 
-module.exports = { sumOf, calculateSumOfValidGames };
+module.exports = {
+  sumOf,
+  calculateSumOfIdsOfValidGame,
+};
