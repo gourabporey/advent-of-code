@@ -1,7 +1,7 @@
 const { sumOf } = require('../lib/arrays');
 
-const calculateSumOfWinningNumberPoints = (scratchCards) => {
-  const points = scratchCards.map(([winningNumbers, numbersIHave]) => {
+const calculateNoOfMatchingCards = (scratchCards) => {
+  return scratchCards.map(([winningNumbers, numbersIHave]) => {
     const noOfMatchingCards = numbersIHave.reduce(
       (matchingCardsCount, number) =>
         winningNumbers.includes(number)
@@ -10,11 +10,24 @@ const calculateSumOfWinningNumberPoints = (scratchCards) => {
       0
     );
 
-    return Math.floor(Math.pow(2, noOfMatchingCards - 1));
+    return noOfMatchingCards;
   });
-
-  console.log(points);
-  return sumOf(points);
 };
 
-module.exports = { calculateSumOfWinningNumberPoints };
+const calculateAllPoints = (scratchCards) => {
+  const points = calculateNoOfMatchingCards(scratchCards).map(
+    (noOfMatchingCards) => Math.floor(Math.pow(2, noOfMatchingCards - 1))
+  );
+
+  return points;
+};
+
+const calculateSumOfWinningNumberPoints = (scratchCards) => {
+  return sumOf(calculateAllPoints(scratchCards));
+};
+
+module.exports = {
+  calculateSumOfWinningNumberPoints,
+  calculateAllPoints,
+  calculateNoOfMatchingCards,
+};
