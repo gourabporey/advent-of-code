@@ -6,33 +6,52 @@ const {
   split,
 } = require('../lib/utils');
 
+const neighboursOf = ({ row, col }, matrix) => {
+  const neighbours = [];
+
+  [row - 1, row, row + 1].forEach((currRowIdx) => {
+    [col - 1, col, col + 1].forEach((currColIdx) => {
+      const isCurrentPos = currRowIdx === row && currColIdx === col;
+
+      if (isOutOfBound(matrix, currRowIdx, currColIdx) || isCurrentPos) return;
+
+      neighbours.push({ row: currRowIdx, col: currColIdx });
+    });
+  });
+
+  return neighbours;
+};
+
 const calculateSumOfGearRatios = (schematic) => {
   const partNumbers = {};
 
-  const isOutOfSchematicBound = (col, row) => isOutOfBound(schematic, row, col);
+  const getStartingCoordinateOfNumberContainingPoint = ({ row, col }) => {
+    let currentCol = col;
+
+    while (isNumber(schematic[row][currentCol])) {
+      currentCol--;
+    }
+
+    return { row, col: currentCol + 1 };
+  };
 
   schematic.forEach((schematicRow, rowIndex) => {
     schematicRow.forEach((element, colIndex) => {
       if (element != '*') return;
 
-      for (let cr = rowIndex - 1; cr <= rowIndex + 1; cr++) {
-        for (let cc = colIndex - 1; cc <= colIndex + 1; cc++) {
-          const isNotCurrentCoor = cr === rowIndex && cc === colIndex;
-          if (isOutOfSchematicBound(cc, cr) || isNotCurrentCoor) continue;
+      const numberNeighbours = neighboursOf(
+        { row: rowIndex, col: colIndex },
+        schematic
+      ).filter(({ row, col }) => isNumber(schematic[row][col]));
 
-          if (isNumber(schematic[cr][cc])) {
-            let currentCol = cc;
+      const gearID = `${rowIndex}_${colIndex}`;
 
-            while (isNumber(schematic[cr][currentCol])) {
-              currentCol--;
-            }
-
-            const gearID = `${rowIndex}_${colIndex}`;
-            partNumbers[gearID] = partNumbers[gearID] || new Set();
-            partNumbers[gearID].add(`${cr}_${currentCol + 1}`);
-          }
-        }
-      }
+      numberNeighbours.forEach((neighbour) => {
+        const { row, col } =
+          getStartingCoordinateOfNumberContainingPoint(neighbour);
+        partNumbers[gearID] = partNumbers[gearID] || new Set();
+        partNumbers[gearID].add(`${row}_${col}`);
+      });
     });
   });
 
