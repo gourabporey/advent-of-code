@@ -1,7 +1,17 @@
 const fs = require('fs');
 const { determineLowestLocationNumber } = require('./src/problem-1');
+const { determineLowestLocationNumberP2 } = require('./src/problem-2');
 
 const toNumber = (text) => +text;
+
+const chunk = (elements, chunkSize) => {
+  const chunks = [];
+  for (let i = 0; i < elements.length; i += chunkSize) {
+    const chunk = elements.slice(i, i + chunkSize);
+    chunks.push(chunk);
+  }
+  return chunks;
+};
 
 const parseAlmanac = (rawAlmanac) => {
   const [seedsData, ...resourcesData] = rawAlmanac.split('\n\n');
@@ -22,13 +32,27 @@ const parseAlmanac = (rawAlmanac) => {
   return { seeds, resources };
 };
 
+const parseAlmanacP2 = (almanac) => {
+  const seeds = chunk(almanac.seeds, 2).flatMap(([start, range]) => ({
+    start,
+    range,
+  }));
+
+  return { ...almanac, seeds };
+};
+
 const main = () => {
   const rawAlmanac = fs.readFileSync('./data/input.txt', 'utf8');
   const almanac = parseAlmanac(rawAlmanac);
-  const lowestLocationNumber = determineLowestLocationNumber(almanac);
+  const almanacP2 = parseAlmanacP2(almanac);
 
-  console.log(almanac, almanac.resources[0].map);
-  console.log('Lowest location number', lowestLocationNumber);
+  // console.log(almanacP2);
+
+  const lowestLocationNumberP1 = determineLowestLocationNumber(almanac);
+  const lowestLocationNumberP2 = determineLowestLocationNumberP2(almanacP2);
+
+  console.log('Lowest location number problem 1', lowestLocationNumberP1);
+  console.log('Lowest location number problem 2', lowestLocationNumberP2);
 };
 
 main();
