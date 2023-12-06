@@ -1,15 +1,16 @@
-const calculatePossibleTimes = (time) =>
-  new Array(time)
-    .fill(time)
-    .map((num, i) => i * (num - i))
-    .concat(0);
+const { multiply } = require('lodash');
+
+const productOf = (numbers) => numbers.reduce(multiply, 1);
 
 const calculateProductOfNumberOfWays = (raceData) => {
   const noOfWays = raceData.map(([time, distance]) => {
-    return calculatePossibleTimes(time).filter((num) => num > distance).length;
+    for (let i = 0; i <= time; i++) {
+      const distanceTravelled = i * (time - i);
+      if (distanceTravelled > distance) return time + 1 - 2 * i;
+    }
   });
 
-  return noOfWays.reduce((a, b) => a * b, 1);
+  return productOf(noOfWays);
 };
 
 module.exports = { calculateProductOfNumberOfWays };
