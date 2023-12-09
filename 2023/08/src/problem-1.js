@@ -1,5 +1,4 @@
 const calculateJourneySteps = ({ instruction, nodes }, { from, to }) => {
-  console.log(instruction, nodes, from, to);
   let currNode = from;
   let stepsTaken = 0;
 

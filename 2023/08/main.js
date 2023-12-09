@@ -1,11 +1,12 @@
 const fs = require('fs');
 const { calculateJourneySteps } = require('./src/problem-1');
+const { calculateJourneyStepsUsingRegex } = require('./src/problem-2');
 
 const parseNavigationInstruction = (rawData) => {
   const [instruction, nodes] = rawData.split('\n\n');
   const nodesNavigation = Object.fromEntries(
     nodes.split('\n').map((node) => {
-      const [n, L, R] = node.match(/[A-Z]{3}/g);
+      const [n, L, R] = node.match(/[A-Z0-9]{3}/g);
       return [n, { L, R }];
     })
   );
@@ -21,7 +22,13 @@ const main = () => {
     to: 'ZZZ',
   });
 
-  console.log('Steps taken', stepsTaken);
+  const stepsTakenForAllAReachingZ = calculateJourneyStepsUsingRegex(
+    navigationInstruction,
+    { from: /A$/, to: /Z$/ }
+  );
+
+  console.log('Steps taken for AAA to ZZZ', stepsTaken);
+  console.log('Steps taken for all A to Z', stepsTakenForAllAReachingZ);
 };
 
 main();
